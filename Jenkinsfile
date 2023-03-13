@@ -3,9 +3,9 @@ pipeline {
     tools{
         maven 'maven-3.9.0'
     }
-    environment { 
-        YOUR_CRED = credentials('docker') 
-    }
+   // environment { 
+        //YOUR_CRED = credentials('docker') 
+  //  }
     stages {
         stage('test') {
             steps {
@@ -22,7 +22,7 @@ pipeline {
          stage('deploy') {
             steps {
                 echo 'deploying of application'
-                withcredentials([usernamePassword( credentialId: 'docker' , usernameVariable:'USERNAME' , passwordVariable:'PAASWORD')])
+                withCredentials([usernamePassword( credentialId: 'docker' , usernameVariable:'USERNAME' , passwordVariable:'PAASWORD')])
                 sh 'docker build -t ka10mal/spring_boot:2.0 .'
                 sh "docker login -u $USERNAME -p $PASSWORD"
                 sh 'docker push ka10mal/spring_boot:2.0'
