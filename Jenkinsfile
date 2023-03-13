@@ -3,6 +3,9 @@ pipeline {
     tools{
         maven 'maven-3.9.0'
     }
+    environment { 
+        YOUR_CRED = credentials('docker') 
+    }
     stages {
         stage('test') {
             steps {
